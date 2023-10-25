@@ -2,9 +2,211 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/css/base.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   <title>Title</title>
 </head>
 <body>
-Hello Spring boot and Thymeleaf
+  <div class="container">
+    <nav class="navbar bg-body-tertiary">
+      <div class="container m-2">
+        <div class="d-flex align-items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="auto" fill="currentColor" class="bi bi-emoji-kiss-fill me-lg-2" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M16 8a8 8 0 1 0-2.697 5.99c-.972-.665-1.632-1.356-1.99-2.062-.388-.766-.419-1.561-.075-2.23.496-.97 1.73-1.466 2.762-1.05.65-.262 1.38-.162 1.957.19.028-.275.043-.555.043-.838ZM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5Zm1.512 3.647c-.347.08-.737.198-1.107.319a.5.5 0 1 1-.31-.95c.38-.125.802-.254 1.192-.343.37-.086.78-.153 1.103-.108.16.022.394.085.561.286.188.226.187.497.131.705a1.894 1.894 0 0 1-.31.593c-.077.107-.168.22-.275.343.107.124.199.24.276.347.142.197.256.397.31.595.055.208.056.479-.132.706-.168.2-.404.262-.563.284-.323.043-.733-.027-1.102-.113a14.87 14.87 0 0 1-1.191-.345.5.5 0 1 1 .31-.95c.371.12.761.24 1.109.321.176.041.325.069.446.084a5.609 5.609 0 0 0-.502-.584.5.5 0 0 1 .002-.695 5.52 5.52 0 0 0 .5-.577 4.465 4.465 0 0 0-.448.082Zm.766-.086-.006-.002c.004 0 .006.002.006.002Zm.002 1.867h-.001l-.005.001a.038.038 0 0 1 .006-.002Zm.157-4.685a.5.5 0 0 1-.874-.486A1.934 1.934 0 0 1 10.25 5.75c.73 0 1.356.412 1.687 1.007a.5.5 0 1 1-.874.486.934.934 0 0 0-.813-.493.934.934 0 0 0-.813.493ZM14 9.828c1.11-1.14 3.884.856 0 3.422-3.884-2.566-1.11-4.562 0-3.421Z"></path>
+          </svg>
+          <span class="fs-4">申請システム</span>
+        </div>
+        <div>時間外申請一覧</div>
+        <div class="d-flex">
+          <div class="me-lg-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="auto" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
+              <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"></path>
+            </svg>
+            <!-- TODO：ログインユーザー名 -->
+            <span>ログインユーザー名</span>
+            <!-- TODO: ログインID -->
+<!--            <input type="hidden">-->
+          </div>
+          <button class="btn btn-secondary" id="logout" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"></path>
+              <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"></path>
+            </svg>
+            ログアウト
+          </button>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <form id="searchForm" method="post">
+    <div class="container">
+      <div class="mt-3 p-3 bg-secondary-subtle">
+        <div class="row g-2">
+          <div class="col form-floating">
+            <select id="applyYear" class="form-control" name="applyYear">
+              <option></option>
+              <option>2023</option>
+              <option>2022</option>
+              <option>2021</option>
+            </select>
+            <label for="applyYear">申請年月（年）</label>
+          </div>
+          <div class="col form-floating">
+            <select id="applyMonth" class="form-control" name="applyMonth">
+              <option></option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
+            <label for="applyMonth">申請年月（月）</label>
+          </div>
+          <div class="col form-floating">
+            <select id="applyHour" name="applyHour" class="form-control">
+              <option></option>
+              <option value="45">45</option>
+              <option value="50">50</option>
+              <option value="55">55</option>
+              <option value="60">60</option>
+            </select>
+            <label for="applyHour">申請時間</label>
+          </div>
+          <div class="col form-floating">
+            <input type="date" class="form-control" id="applyDateFrom" name="applyDateFrom">
+            <label for="applyDateFrom">申請日（FROM）</label>
+          </div>
+          <div class="col form-floating">
+            <input type="date" class="form-control" id="applyDateTo" name="applyDateTo">
+            <label for="applyDateTo">申請日（TO）</label>
+          </div>
+          <div class="col form-floating">
+            <select id="statusCd" class="form-control" name="statusCd">
+              <option></option>
+              <option value="01">作成中</option>
+              <option value="02">承認待ち</option>
+              <option value="03">承認済み</option>
+              <option value="04">否認</option>
+              <option value="05">棄却</option>
+            </select>
+            <label for="statusCd">状況</label>
+          </div>
+          <div class="col-1 d-flex align-items-center justify-content-center">
+            <button class="btn btn-primary my-2 px-4" type="button" id="search">検索</button>
+          </div>
+          <div class="col-1 d-flex align-items-center">
+            <button class="btn btn-dark my-2" type="button" id="showAll">全件表示</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-4" id="applyListWrapper">
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th scope="col">申請番号</th>
+          <th scope="col">申請年月</th>
+          <th scope="col">申請時間</th>
+          <th scope="col">申請日</th>
+          <th scope="col">承認者</th>
+          <th scope="col">状況</th>
+          <th scope="col">更新日時</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th scope="row">11</th>
+          <td>202309</td>
+          <td>45</td>
+          <td>2023-10-17</td>
+          <td>seniorManagerBBB</td>
+          <td>承認待ち</td>
+          <td>2023-10-22</td>
+        </tr>
+        <tr class="table-secondary">
+          <th scope="row">10</th>
+          <td>202308</td>
+          <td>50</td>
+          <td>2023-08-13</td>
+          <td>seniorManagerBBB</td>
+          <td>承認済み</td>
+          <td>2023-10-22</td>
+        </tr>
+        <tr class="table-secondary">
+          <th scope="row">9</th>
+          <td>202307</td>
+          <td>55</td>
+          <td>2023-07-16</td>
+          <td>seniorManagerBBB</td>
+          <td>承認済み</td>
+          <td>2023-10-22</td>
+        </tr>
+        <tr class="table-danger">
+          <th scope="row">8</th>
+          <td>202307</td>
+          <td>45</td>
+          <td>2023-07-14</td>
+          <td>seniorManagerBBB</td>
+          <td>否認</td>
+          <td>2023-10-22</td>
+        </tr>
+        <tr class="table-secondary">
+          <th scope="row">5</th>
+          <td>202306</td>
+          <td>55</td>
+          <td>2023-07-16</td>
+          <td>seniorManagerBBB</td>
+          <td>承認済み</td>
+          <td>2023-10-22</td>
+        </tr>
+        <tr class="table-secondary">
+          <th scope="row">4</th>
+          <td>202304</td>
+          <td>50</td>
+          <td>2023-07-16</td>
+          <td>seniorManagerBBB</td>
+          <td>承認済み</td>
+          <td>2023-10-22</td>
+        </tr>
+        <tr class="table-secondary">
+          <th scope="row">3</th>
+          <td>202303</td>
+          <td>45</td>
+          <td>2023-07-16</td>
+          <td>seniorManagerBBB</td>
+          <td>承認済み</td>
+          <td>2023-10-22</td>
+        </tr>
+        <tr class="table-secondary">
+          <th scope="row">2</th>
+          <td>202301</td>
+          <td>60</td>
+          <td>2023-07-16</td>
+          <td>seniorManagerBBB</td>
+          <td>承認済み</td>
+          <td>2023-10-22</td>
+        </tr>
+        <tr class="table-danger">
+          <th scope="row">1</th>
+          <td>202301</td>
+          <td>50</td>
+          <td>2023-07-16</td>
+          <td>seniorManagerBBB</td>
+          <td>棄却</td>
+          <td>2023-10-22</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </form>
 </body>
 </html>
