@@ -1,6 +1,7 @@
 package com.study.helloSpringBoot.helper;
 
 import com.study.helloSpringBoot.dto.apply.ApplyMainDto;
+import com.study.helloSpringBoot.entity.CommonMaster;
 import com.study.helloSpringBoot.vo.EmployeeBasicInfoVo;
 
 import java.util.ArrayList;
@@ -14,12 +15,13 @@ public class ApplyMainHelper {
    * @param employeeInfo - 社員情報
    * @return
    */
-  public ApplyMainDto initApplyMainDto(EmployeeBasicInfoVo employeeInfo) {
+  public ApplyMainDto initApplyMainDto(EmployeeBasicInfoVo employeeInfo, List<CommonMaster> applyStatusList) {
     ApplyMainDto mainDto = new ApplyMainDto();
     // Header 社員情報
     mainDto.setEmployeeVo(employeeInfo);
     // Search area
     mainDto.setYearList(this.getDefaultYearList());
+    mainDto.setStatusList(applyStatusList);
     return mainDto;
   }
 

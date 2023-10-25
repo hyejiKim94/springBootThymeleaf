@@ -76,11 +76,7 @@
           <div class="col form-floating">
             <select id="statusCd" class="form-control" name="statusCd">
               <option></option>
-              <option value="01">作成中</option>
-              <option value="02">承認待ち</option>
-              <option value="03">承認済み</option>
-              <option value="04">否認</option>
-              <option value="05">棄却</option>
+              <option th:each="status :*{statusList}" th:value="${status.masterValue}" th:text="${status.masterValueName}"></option>
             </select>
             <label for="statusCd">状況</label>
           </div>
