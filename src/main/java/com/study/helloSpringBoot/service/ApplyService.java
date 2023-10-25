@@ -1,5 +1,6 @@
 package com.study.helloSpringBoot.service;
 
+import com.study.helloSpringBoot.dto.apply.ApplySearchDto;
 import com.study.helloSpringBoot.repository.OvertimeApplyRepository;
 import com.study.helloSpringBoot.vo.OvertimeApplyVo;
 import lombok.RequiredArgsConstructor;
@@ -15,5 +16,9 @@ public class ApplyService {
 
   public List<OvertimeApplyVo> getAllList(Long employeeId) {
     return applyRepo.getApplyList(employeeId);
+  }
+
+  public List<OvertimeApplyVo> getListByCondition(ApplySearchDto searchDto, Long employeeId) {
+    return applyRepo.getApplyListByCondition(searchDto, employeeId);
   }
 }
